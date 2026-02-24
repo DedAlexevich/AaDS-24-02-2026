@@ -18,9 +18,21 @@ VecIt< T > begin(Vec<T> d)
 }
 
 template< class T >
+VecIt< T > rbegin(Vec<T> d)
+{
+  return {d.data, d.s, d.s};
+}
+
+template< class T >
 bool hasNext(VecIt<T> it)
 {
   return it.i != it.s;
+}
+
+template< class T >
+bool hasPrev(VecIt<T> it)
+{
+  return 0 != it.i;
 }
 
 template< class T >
@@ -30,15 +42,30 @@ VecIt<T> next(VecIt<T> it)
 }
 
 template< class T >
-T* value(VecIt<T> it)
+VecIt<T> prev(VecIt<T> it)
 {
-  return it.data[it.i];
+  return {it.data, it.i - 1, it.s};
+}
+
+template< class T >
+T& value(VecIt<T> it)
+{
+  return it.data[it.i - 1];
 }
 
 
 int main()
 {
-  std::cout << "Hello, World!\n";
+  Vec<int> a{ new int[10], 10};
+  for (size_t i = 0; i < 10; i++) {
+    a.data[i] = i;
+  }
+  VecIt<int> h = rbegin(a);
+  for (;hasPrev(h); h = prev(h)) {
+    std::cout << value(h) << '\n';
+  }
+
+  delete[] a.data;
   return 0;
 }
 
