@@ -29,9 +29,16 @@ VecIt<T> next(VecIt<T> it)
   return {it.data, it.i + 1, it.s};
 }
 
+template< class T >
+T* value(VecIt<T> it)
+{
+  return it.data[it.i];
+}
+
 
 int main()
 {
   std::cout << "Hello, World!\n";
   return 0;
 }
+
