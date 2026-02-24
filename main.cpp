@@ -20,9 +20,14 @@ VecIt< T > begin(Vec<T> d)
 template< class T >
 bool hasNext(VecIt<T> it)
 {
-  return it.i == it.s;
+  return it.i != it.s;
 }
 
+template< class T >
+VecIt<T> next(VecIt<T> it)
+{
+  return {it.data, it.i + 1, it.s};
+}
 
 
 int main()
